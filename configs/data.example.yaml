@@ -1,0 +1,36 @@
+schema_version: 1
+
+data_root: ${GC_TRG_DATA_ROOT}
+
+directories:
+  images: imagesTr
+  masks: labelsTr
+  old_masks: labelsTr_old
+
+filename_rules:
+  image_modality_suffix: _0000
+  pre_suffix: _000
+  post_suffix: _001
+
+analysis:
+  mask_source: labelsTr
+  responder_trg: [0, 1]
+
+expected:
+  image_files: 371
+  mask_files: 371
+  old_mask_files: 370
+  image_mask_pairs: 371
+  assigned_timepoints: 300
+  unassigned_timepoints: 71
+  complete_patients: 150
+  labeled_patients: 146
+  unlabeled_patients: 4
+  trg_counts:
+    0: 25
+    1: 17
+    2: 54
+    3: 50
+  binary_counts:
+    0: 104
+    1: 42

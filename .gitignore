@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+
+# Local configuration and secrets
+.env
+configs/data.local.yaml
+
+# Raw medical data and local outputs
+/data/
+*.nii
+*.nii.gz
+outputs/
+logs/
