@@ -13,7 +13,7 @@
 旧仓库 [GC-TRG](https://github.com/CminMaj9/GC-TRG) 只用于追溯历史和核对数据
 命名规则。本仓库中的代码从数据审计开始重新建立，不直接继承旧实验结果。
 
-## 当前阶段：Step 00 数据终审
+## Step 00：数据终审
 
 原始数据固定保存在仓库之外：
 
@@ -69,4 +69,22 @@ python .\scripts\00_build_manifest.py `
 | TRG 0/1/2/3 | 25 / 17 / 54 / 50 |
 | responder / non-responder | 42 / 104 |
 
-只有 Step 00 严格通过并人工核对输出后，才进入 PyRadiomics 特征提取。
+## Step 01：Pre CT 几何与 ROI 负荷审计
+
+Step 00 严格通过后运行：
+
+```powershell
+python .\scripts\01_audit_pre_geometry_roi.py `
+  --data-root "C:\Users\16129\Desktop\My-TRG\data" `
+  --strict
+```
+
+结果写入 `outputs/step01_pre_audit/`：
+
+- `pre_geometry_roi_audit.csv`：146 位有标签患者的 Pre CT 技术变量和基础
+  肿瘤负荷变量；
+- `pre_geometry_roi_issues.csv`：空 mask、读取失败或 CT-mask 几何不一致；
+- `pre_geometry_roi_report.json`：病例数、标签分布和错误数汇总。
+
+这一步不提取 PyRadiomics 特征，也不训练分类器。它先确认 CT-mask 物理空间
+一致，并建立 Gate 0 所需的 spacing、层数、肿瘤体积和包围盒尺寸等变量。
